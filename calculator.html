@@ -17,95 +17,12 @@
                     <tbody>
 
                         <tr>
-                            <td><button onclick="clearAll()">C</button> </td>
-                            <td><button onclick="calc('*(')">(</button></td>
-                            <td><button onclick="calc(')')">)</button></td>
+                            <td><button onclick="clearAll()">AC</button> </td>
                             <td><button onclick="calc('/100')">%</button></td>
+                            <td><button onclick="calc('*')">*</button></td>
+                            <td><button onclick="calc('/')">÷</button></td>
+
                         </tr>
-                        <script>
-                                  let array = [];
-                                  let numbers = ["1","2","3","4","5","6","7","8","9","0"];
-                                  let joinedNumber = "";
-                                  let arrangedArray = [];
-                                  let symbols = [];
-
-
-                                  function calc(x){
-                                      if(array == [] && !numbers.indexOf(x)>-1){
-
-                                      }
-                                      else{
-                                          if(!numbers.indexOf(x)>-1 && array!=[] && !numbers.indexOf([array.length-1])>-1){
-                                            //   array.pop();
-                                          }
-                                          
-                                    array.push(x)
-                                      console.log(array);
-                                      document.getElementById("input").value = array.join("");
-                                      arrangedArray = [];
-                                      symbols = [];
-                                      }
-                                      
-                                    }
-                          
-                                    function finalCalc(){
-                                        for(let a=0; a<array.length;a++){
-                                            if(numbers.indexOf(array[a]) > -1){
-                                                joinedNumber+=array[a];
-                                                if(a==array.length-1){
-                                                    arrangedArray.push(parseInt(joinedNumber));
-                                                }  
-                                                
-                                            }
-                                            else {
-                                                if(a>0 && !numbers.indexOf(array[a-1])>-1){
-                                                    arrangedArray.pop();
-
-                                                }
-                                                if(joinedNumber!=""){
-                                                    arrangedArray.push(parseInt(joinedNumber));
-                                                }
-                                                joinedNumber="";
-                                                arrangedArray.push(array[a]);
-                                                
-                                               
-
-                                            }
-                                        }
-
-                                        
-                                        let calculation = arrangedArray.join("");
-                                       document.getElementById("input").value = eval(calculation);
-                                       arrangedArray = [];
-                                      symbols = [];
-
-                                        console.log(arrangedArray);
-                                        console.log(calculation);
-
-
-                                  }
-                                  function clearAll(){
-                                      console.log("clear");
-                                      arrangedArray = [];
-                                      symbols = [];
-                                      array = [];
-                                      document.getElementById("input").value = "";
-
-                                  }
-
-
-
-                                  function deleteX(){
-                                      array.pop();
-                                      document.getElementById("input").value = array.join("");
-                                      arrangedArray = [];
-                                      symbols = [];
-
-                                  }
-
-                                  
-
-                        </script>
 
                         <tr>
                             <td><button onclick="calc('1')">1</button></td>
@@ -123,14 +40,14 @@
                     <td><button onclick="calc('7')">7</button></td>
                     <td><button onclick="calc('8')">8</button></td>
                     <td><button onclick="calc('9')">9</button></td>
-                    <td><button onclick="calc('*')">*</button></td>
+                    <td><button onclick="deleteX()">&leftarrow;</button></td>
+
                     </tr>
 
                     <tr>
-                        <td><button>+/-</button></td>
-                        <td><button>0</button></td>
-                        <td><button onclick="deleteX()">&leftarrow;</button></td>
-                        <td><button onclick="finalCalc()">=</button></td>
+                        <td><button onclick="calc('.')">.</button></td>
+                        <td><button onclick="calc('0')">0</button></td>
+                        <td colspan="2"><button id="equals"  onclick="finalCalc()">=</button></td>
                         </tr>
 
                 </tbody>
@@ -139,4 +56,108 @@
             </div>
         </div>
     </body>
+
+    <script>
+        let array = [];
+        let numbers = ["1","2","3","4","5","6","7","8","9","0"];
+        let joinedNumber = "";
+        let arrangedArray = [];
+        let symbols = [];
+
+
+        function calc(x){
+            if(array == [] && !numbers.indexOf(x)>-1){
+
+            }
+            else{
+                if(!numbers.indexOf(x)>-1 && array!=[] && !numbers.indexOf([array.length-1])>-1){
+                  //   array.pop();
+                }
+                
+          array.push(x)
+            console.log(array);
+            document.getElementById("input").value = array.join("");
+            arrangedArray = [];
+            symbols = [];
+            }
+
+            console.log(numbers.indexOf(array[array.length-1])>-1);
+
+document.getElementById("equals").disabled = numbers.indexOf(array[array.length-1])==-1; 
+            
+          }
+
+          function finalCalc(){
+
+
+
+
+              for(let a=0; a<array.length;a++){
+                  if(numbers.indexOf(array[a]) > -1){
+                      joinedNumber+=array[a];
+                      if(a==array.length-1){
+                          arrangedArray.push(parseInt(joinedNumber));
+                          joinedNumber = "";
+                      }  
+                      
+                  }
+                  else {
+                      if(a>0 && !numbers.indexOf(array[a-1])>-1){
+                          arrangedArray.pop();
+
+                      }
+                      if(joinedNumber!=""){
+                          arrangedArray.push(parseInt(joinedNumber));
+                          joinedNumber="";
+
+                      }
+                      joinedNumber="";
+                      arrangedArray.push(array[a]);
+                      
+                     
+
+                  }
+              }
+              let calculation = arrangedArray.join("");
+              document.getElementById("input").value = eval(calculation);
+              console.log(calculation);
+
+              array=[];
+              calculation = 0;
+              arrangedArray = [];
+              symbols = [];
+              
+              console.log(arrangedArray);
+              console.log(calculation);
+
+
+        }
+        function clearAll(){
+            console.log("clear");
+            arrangedArray = [];
+            symbols = [];
+            array = [];
+            document.getElementById("input").value = "";
+            calculation = 0;
+
+        }
+
+
+
+        function deleteX(){
+            array.pop();
+            document.getElementById("input").value = array.join("");
+            arrangedArray = [];
+            symbols = [];
+            document.getElementById("equals").disabled = !numbers.indexOf(array[array.length-1])>-1; 
+
+
+        }
+        console.log(numbers.indexOf(array[array.length-1])>-1);
+
+            document.getElementById("equals").disabled = numbers.indexOf(array[array.length-1])>-1; 
+        
+        
+
+</script>
 </html>
