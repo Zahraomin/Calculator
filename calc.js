@@ -6,8 +6,15 @@
         let calculation = undefined;
         let calculationString = "";
         let symbols = ["*","/","+","-"];
+        
+
+        const dotOccurences = (arr,value) =>{ let count = 0; for(let a=0; a<arr.length;a++){if(arr[a]==='.') count++; } return count;}
 
         function calc(x){
+
+            if((x=="." && array.indexOf(".")>-1 && !array.some(v => symbols.includes(v))) ||(x=="." && dotOccurences(array,".")>1 && array.some(v => symbols.includes(v)))){
+                return
+            }
 
             if(array == [] && symbols.includes(x)){
                 return
@@ -44,8 +51,7 @@
             }
 
             console.log(numbers.indexOf(array[array.length-1])>-1);
-
-document.getElementById("equals").disabled = symbols.includes(array[array.length-1]); 
+            document.getElementById("equals").disabled = symbols.includes(array[array.length-1]); 
             
           }
 
