@@ -9,14 +9,18 @@
 
     
 }
-input{
+.input{
+    border: 1px solid blanchedalmond;
+    display: block;
     width: 98%;
-    height: 50px;
-    font-size: 25px;
+    max-width: 98%;
+    height: 75px;
+    font-size: 2.5rem;
     color:blanchedalmond;
     background-color: black;
     word-wrap: break-word;
     word-break: break-all;
+    padding-top: 2px;
 }
 
 .calc {
@@ -33,7 +37,7 @@ button{
     text-align: center;
     font-size: 30px;
 }
-#equals{
+.doubleSpan{
     width:100%;
 }
 
