@@ -7,12 +7,18 @@
         let calculationString = "";
         let symbols = ["*","/","+","-"];
         
+        
+        
 
-        const dotOccurences = (arr,value) =>{ let count = 0; for(let a=0; a<arr.length;a++){if(arr[a]==='.') count++; } return count;}
+        const dotOccurences = (arr,value) =>{ let count = 0; for(let a=value; a<arr.length;a++){if(arr[a]==='.') count++; } return count;}
 
         function calc(x){
 
-            if((x=="." && array.indexOf(".")>-1 && !array.some(v => symbols.includes(v))) ||(x=="." && dotOccurences(array,".")>1 && array.some(v => symbols.includes(v)))){
+         
+            let arraySymbol = array.filter(element => symbols.includes(element));
+            let symbolIndex = (array.indexOf(arraySymbol.length>0?arraySymbol[0]:"@"));
+
+            if((x=="." && array.indexOf(".")>-1 && !array.some(v => symbols.includes(v))) || (x=="." && dotOccurences(array,symbolIndex)>0 && array.some(v => symbols.includes(v)))){
                 return
             }
 
@@ -87,7 +93,7 @@
               calculationString = arrangedArray.join("");
               console.log(calculationString);
 
-              calculation = math.eval(calculationString);
+              calculation = math.eval(calculationString).toFixed(math.eval(calculationString).toString().length);
               document.getElementById("input").innerHTML  = calculation;
               console.log(calculation);
 
@@ -116,5 +122,4 @@
             document.getElementById("equals").disabled = symbols.includes(array[array.length-1]); 
         }
 
-        console.log(numbers.indexOf(array[array.length-1])>-1);
-        document.getElementById("equals").disabled = symbols.includes(array[array.length-1]); 
+        
