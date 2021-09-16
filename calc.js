@@ -6,9 +6,7 @@
         let calculation = undefined;
         let calculationString = "";
         let symbols = ["*","/","+","-"];
-        
-        
-        
+    
 
         const dotOccurences = (arr,value) =>{ let count = 0; for(let a=value; a<arr.length;a++){if(arr[a]==='.') count++; } return count;}
 
@@ -93,7 +91,7 @@
               calculationString = arrangedArray.join("");
               console.log(calculationString);
 
-              calculation = math.eval(calculationString).toFixed(math.eval(calculationString).toString().length);
+              calculation = math.eval(calculationString).toFixed(4);
               document.getElementById("input").innerHTML  = calculation;
               console.log(calculation);
 
